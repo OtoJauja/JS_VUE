@@ -5,7 +5,7 @@
     </div>
     <div class="right-section">
       <div class="user-info" v-if="loggedIn">
-        <div class="avatar" :style="{ backgroundColor: avatarColor }">
+        <div class="avatar" :style="{ backgroundColor: randomColor }">
           {{ user.full_name }}
         </div>
         <span>Oto Jauja |</span>
@@ -34,6 +34,10 @@ export default {
   computed: {
     full_name() {
       return this.user.name + ' ' + this.user.surname
+    },
+    randomColor() {
+      const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
+      return randomColor;
     },
   },
   methods: {
