@@ -1,12 +1,16 @@
 <template>
-    <div class="text">
-        <h1>HOME</h1>
-    </div>
+  <div>
+    <h2>HOME</h2>
+    <SongListComponent />
+  </div>
 </template>
 
-<style>
-.text {
-    color: azure;
-    font: bold;
-}
-</style>
+<script>
+import SongListComponent from "/src/components/SongListComponent.vue";
+
+export default {
+  components: {
+    SongListComponent,
+  },
+};
+</script>

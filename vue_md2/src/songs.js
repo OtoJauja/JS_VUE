@@ -1,0 +1,1 @@
+export const songs = require("./assets/songs-example.json");

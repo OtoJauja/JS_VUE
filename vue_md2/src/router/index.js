@@ -1,39 +1,39 @@
-import Vue from 'vue';
-import VueRouter from 'vue-router';
-import LandingComponent from './components/LandingComponent.vue';
-import HomeComponent from './components/HomeComponent.vue';
-import AboutMeComponent from './components/AboutMeComponent.vue';
+import { createRouter, createWebHistory } from "vue-router";
+import LandingComponent from "/src/components/LandingComponent.vue";
+import HomeComponent from "/src/components/HomeComponent.vue";
+import AboutMeComponent from "/src/components/AboutMeComponent.vue";
+import store from "/src/store.js";
 
-Vue.use(VueRouter);
-
-const routes = [
-  { path: '/', component: LandingComponent },
-  {
-    path: '/home',
-    component: HomeComponent,
-    beforeEnter: (to, from, next) => {
-      if (Vue.prototype.$store.state.user.logged_in) {
-        next();
-      } else {
-        next('/');
-      }
+const router = createRouter({
+  history: createWebHistory(),
+  routes: [
+    {
+      path: "/",
+      component: LandingComponent,
     },
-  },
-  {
-    path: '/about-me',
-    component: AboutMeComponent,
-    beforeEnter: (to, from, next) => {
-      if (Vue.prototype.$store.state.user.logged_in) {
-        next();
-      } else {
-        next('/');
-      }
+    {
+      path: "/home",
+      component: HomeComponent,
+      meta: {
+        requiresAuth: true,
+      },
     },
-  },
-];
+    {
+      path: "/about-me",
+      component: AboutMeComponent,
+      meta: {
+        requiresAuth: true,
+      },
+    },
+  ],
+});
 
-const router = new VueRouter({
-  routes,
+router.beforeEach((to, from, next) => {
+  if (to.meta.requiresAuth && !store.state.user.loggedInStatus) {
+    next("/");
+  } else {
+    next();
+  }
 });
 
 export default router;

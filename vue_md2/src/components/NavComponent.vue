@@ -1,36 +1,21 @@
 <template>
-    <div v-if="loggedIn" class="button">
-        <button @click="showHome" :class="{ active: currentComponent === 'home' }">HOME</button>
-    </div>
-    <div v-if="loggedIn" class="button">
-        <button @click="showAbout" :class="{ active: currentComponent === 'about' }">ABOUT ME</button>
-    </div>
+    <nav>
+        <router-link to="/home">Home</router-link>
+        <router-link to="/about-me">About Me</router-link>
+        <router-link to="/" v-if="store.user.isLoggedIn">Logout</router-link>
+    </nav>
 </template>
   
 <script>
 export default {
-    props: {
-        loggedIn: Boolean,
-    },
-    data() {
-        return {
-            currentComponent: 'home',
-        };
-    },
-    methods: {
-        showHome() {
-            this.currentComponent = 'home';
-            this.$emit('changeComponent', 'home');
-        },
-        showAbout() {
-            this.currentComponent = 'about';
-            this.$emit('changeComponent', 'about');
-        },
-    },
+  name: "NavComponent",
 };
 </script>
 
 <style>
+.router-link.active {
+  font-weight: bold;
+}
 button {
     background-color: rgb(157, 0, 248);
     color: white;

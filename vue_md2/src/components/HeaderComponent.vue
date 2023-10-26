@@ -8,15 +8,17 @@
         <div class="avatar" :style="{ backgroundColor: randomColor }">
           {{ user.full_name }}
         </div>
-        <span>Oto Jauja |</span>
-        <button class = "button" v-if="loggedIn" @click="toggleLogin">LOGOUT</button>
+        <span v-if="user.loggedInStatus">| {{ fullName }}</span>
+        <button @click="loginLogout">{{ loginLogoutText }}</button>
       </div>
-      <button class = "button" v-if="!loggedIn" @click="toggleLogin">LOGIN</button>
     </div>
   </div>
 </template>
 
 <script>
+
+import store from "/src/store.js";
+
 export default {
   props: {
     loggedIn: Boolean,
@@ -32,8 +34,14 @@ export default {
     }
   },
   computed: {
-    full_name() {
-      return this.user.name + ' ' + this.user.surname
+    user() {
+      return store.state.user;
+    },
+    fullName() {
+      return `${this.user.firstName} ${this.user.lastName}`;
+    },
+    loginLogoutText() {
+      return this.user.loggedInStatus ? "LOGOUT" : "LOGIN";
     },
     randomColor() {
       const randomColor = '#' + Math.floor(Math.random()*16777215).toString(16);
@@ -41,16 +49,16 @@ export default {
     },
   },
   methods: {
-    toggleLogin() {
-      if (this.loggedIn) {
-        const confirmLogout = window.confirm('Do you want to log out?')
+    loginLogout() {
+      if (this.user.loggedInStatus) {
+        const confirmLogout = window.confirm("Do you want to log out?");
         if (confirmLogout) {
-          this.$emit('loginStatus', 'logout')
+          store.dispatch("resetUser");
         }
       } else {
-        const confirmLogin = window.confirm('Do you want to log in?')
+        const confirmLogin = window.confirm("Do you want to log in?");
         if (confirmLogin) {
-          this.$emit('loginStatus', 'login')
+          store.dispatch("login");
         }
       }
     },
@@ -82,7 +90,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  width:auto;
+  width: 1848px;
 }
 
 .header-logged-in {
