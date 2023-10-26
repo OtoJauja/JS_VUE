@@ -11,6 +11,7 @@ import SongListComponent from "/src/components/SongListComponent.vue";
 export default {
   components: {
     SongListComponent,
-  },
+    HeaderComponent
+},
 };
 </script>

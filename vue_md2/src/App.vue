@@ -1,46 +1,39 @@
 <template>
   <div>
-    <HeaderComponent />
-    <AboutMeComponent />
-    <FormComponent />
+    <HeaderComponent/>
+
+    <NavComponent v-if="user.loggedInStatus" />
+
+    <router-view />
   </div>
 </template>
 
 <script>
 import HeaderComponent from "./components/HeaderComponent.vue";
-import AboutMeComponent from "./components/AboutMeComponent.vue";
-import FormComponent from "./components/FormComponent.vue";
-import store from "/src/store.js";
+import NavComponent, { createRouter, createWebHistory } from
+ 
+"vue-router";
+import routes from
+ 
+"./router";
+
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
 
 export default {
   components: {
     HeaderComponent,
-    AboutMeComponent,
-    FormComponent,
+    NavComponent,
   },
   data() {
     return {
-      isEditFormButtonActive: false,
+      user: {
+        loggedInStatus: false,
+      },
     };
   },
+  router,
 };
 </script>
-
-<style scoped>
-.content {
-  flex: 1;
-}
-
-.app-container {
-  display: flex;
-  justify-content: space-between;
-}
-
-.left-column {
-  width: 30%;
-}
-
-.right-column {
-  width: 70%;
-}
-</style>

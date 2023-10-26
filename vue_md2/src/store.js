@@ -26,6 +26,5 @@ export function resetUser() {
 }
 
 export function updateUser(user) {
-  // Update the user data in the store
   store.state.user = user;
 }

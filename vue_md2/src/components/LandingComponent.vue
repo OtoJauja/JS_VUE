@@ -10,8 +10,11 @@
 </template>
   
 <script>
+import HeaderComponent from '/src/components/HeaderComponent.vue';
+
 export default {
-  name: 'LandingComponent',
+    name: 'LandingComponent',
+    components: { HeaderComponent }
 }
 </script>
   

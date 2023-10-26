@@ -1,1 +1,1 @@
-export const songs = require("./assets/songs-example.json");
+export const songs = require("/songs-example.json");

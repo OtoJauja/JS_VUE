@@ -1,37 +1,22 @@
 <template>
-  <div class="header" :class="{ 'header-logged-in': loggedIn }">
-    <div class="left-section">
-      <img src="@/assets/logo (white).svg" alt="Logo" height="60" width="60" />
-    </div>
-    <div class="right-section">
-      <div class="user-info" v-if="loggedIn">
-        <div class="avatar" :style="{ backgroundColor: randomColor }">
-          {{ user.full_name }}
-        </div>
-        <span v-if="user.loggedInStatus">| {{ fullName }}</span>
-        <button @click="loginLogout">{{ loginLogoutText }}</button>
-      </div>
-    </div>
-  </div>
+  <header class="header">
+    <img src="/src/assets/logo (white).svg" alt="Logo" class="header__logo">
+    <h1 class="header__title">KRAKEN.FM</h1>
+    <b-avatar :style="{ backgroundColor: randomColor }"></b-avatar>
+    <span v-if="user.loggedInStatus">| {{ fullName }}</span>
+    <button  class="header__login-button" @click="loginLogout">{{ loginLogoutText }}</button>
+  </header>
 </template>
 
 <script>
 
 import store from "/src/store.js";
+import HeaderComponent from '/src/components/HeaderComponent.vue'
 
 export default {
-  props: {
-    loggedIn: Boolean,
-  },
-  data() {
-    return {
-      user: {
-        name: 'Oto',
-        surname: 'jauja',
-        code: 'IT21038',
-      },
-      avatarColor: '#f0c10f',
-    }
+  name: "HeaderComponent",
+  components: {
+    HeaderComponent,
   },
   computed: {
     user() {
@@ -67,65 +52,31 @@ export default {
 </script>
 
 <style scoped>
-.left-section {
-  display: flex;
-  align-items: center;
-}
-
-.right-section {
-  text-align: right;
-  align-items: center;
-  color: white;
-}
-
-.user-info {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .header {
-  background-color: rgb(49, 39, 59);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  width: 1848px;
-}
-
-.header-logged-in {
-  background-color: rgb(157, 0, 248);
-  display: flex;
   justify-content: space-between;
-  align-items: center;
-  padding: 20px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
 }
 
-.login-logout-button {
-  text-align: right;
-}
-
-.avatar {
+.header__logo {
   width: 50px;
   height: 50px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 10px;
 }
 
-button {
-  background-color: #252525;
-  color: white;
-  border: none;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-
-button:hover {
-  background-color: #5a5a5a;
-}
-
-.navigation-button.active {
+.header__title {
+  font-size: 1.5rem;
   font-weight: bold;
+}
+
+.header__login-button {
+  background-color: #333;
+  color: #fff;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }
 </style>
