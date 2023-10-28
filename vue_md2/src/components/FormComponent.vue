@@ -17,13 +17,13 @@
 
 <script>
 import { computed } from "vue";
-import { store } from "/src/store.js";
+import { updateUser } from "/src/store.js";
 
 export default {
   name: "FormComponent",
   computed: {
     user() {
-      return store.state.user;
+      return updateUser.state.user;
     },
     isEditFormButtonActive() {
       return this.$root.isEditFormButtonActive;

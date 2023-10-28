@@ -1,5 +1,4 @@
-import { songs } from "./songs.js";
-
+import songs from "/src/songs.js";
 export const allSongs = songs;
 
 export const user = {
@@ -28,3 +27,10 @@ export function resetUser() {
 export function updateUser(user) {
   store.state.user = user;
 }
+export default {
+  allSongs,
+  user,
+  login,
+  resetUser,
+  updateUser,
+};

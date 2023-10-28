@@ -27,13 +27,14 @@
 
 <script>
 import { computed } from "vue";
-import { store } from "/src/store.js";
+import { updateUser } from "/src/store.js";
+
 
 export default {
   name: "AboutMeComponent",
   computed: {
     user() {
-      return store.state.user;
+      return updateUser.state.user;
     },
     isEditFormButtonActive() {
       return this.$root.isEditFormButtonActive;
@@ -41,10 +42,7 @@ export default {
   },
   methods: {
     saveForm() {
-      // Save the user data to the store
       store.dispatch("updateUser", this.user);
-
-      // Disable the edit form button
       this.$root.isEditFormButtonActive = false;
     },
   },

@@ -1,7 +1,7 @@
 import './assets/main.css'
 import App from './App.vue'
-
 import { createApp } from "vue";
+
 import LandingComponent from "./components/LandingComponent.vue";
 import HeaderComponent from "./components/HeaderComponent.vue";
 import NavComponent from "./components/NavComponent.vue";

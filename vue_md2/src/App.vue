@@ -10,12 +10,9 @@
 
 <script>
 import HeaderComponent from "./components/HeaderComponent.vue";
-import NavComponent, { createRouter, createWebHistory } from
- 
-"vue-router";
-import routes from
- 
-"./router";
+import NavComponent from "./components/NavComponent.vue"
+import { createRouter, createWebHistory } from "vue-router";
+import routes from "./router";
 
 const router = createRouter({
   history: createWebHistory(),

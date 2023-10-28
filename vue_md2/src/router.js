@@ -2,17 +2,19 @@ import { createRouter, createWebHistory } from "vue-router";
 import LandingComponent from "./components/LandingComponent.vue";
 import HomeComponent from "./components/HomeComponent.vue";
 import AboutMeComponent from "./components/AboutMeComponent.vue";
-import store from "./store.js";
+import store from "/src/store.js";
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
     {
       path: "/",
+      name: "Landing view",
       component: LandingComponent,
     },
     {
       path: "/home",
+      name: "Home",
       component: HomeComponent,
       meta: {
         requiresAuth: true,
@@ -20,20 +22,13 @@ const router = createRouter({
     },
     {
       path: "/about-me",
+      name: "About me",
       component: AboutMeComponent,
       meta: {
         requiresAuth: true,
       },
     },
   ],
-});
-
-router.beforeEach((to, from, next) => {
-  if (to.meta.requiresAuth && !store.state.user.loggedInStatus) {
-    next("/");
-  } else {
-    next();
-  }
 });
 
 export default router;
